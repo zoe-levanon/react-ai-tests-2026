@@ -9,31 +9,34 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#1d4ed8',
-      light: '#60a5fa',
-      dark: '#1e3a8a',
+      main: '#1f647a',
+      light: '#5f97aa',
+      dark: '#184d5f',
     },
     secondary: {
-      main: '#f97316',
-      light: '#fdba74',
-      dark: '#c2410c',
+      main: '#b76445',
+      light: '#d8997e',
+      dark: '#8f4f36',
     },
     background: {
-      default: '#f7f8fc',
-      paper: '#ffffff',
+      default: '#f5efe6',
+      paper: '#fffdfa',
     },
     text: {
-      primary: '#111827',
-      secondary: '#526071',
+      primary: '#18212a',
+      secondary: '#5f6b76',
     },
   },
   shape: {
-    borderRadius: 18,
+    borderRadius: 12,
   },
   typography: {
-    fontFamily: '"Avenir Next", "Manrope", "Segoe UI", sans-serif',
+    fontFamily: '"Plus Jakarta Sans", "Avenir Next", "Segoe UI", sans-serif',
     h1: {
-      fontFamily: '"Avenir Next Condensed", "Avenir Next", "Segoe UI", sans-serif',
+      fontFamily: '"Avenir Next Condensed", "Plus Jakarta Sans", "Segoe UI", sans-serif',
+      fontWeight: 700,
+    },
+    h3: {
       fontWeight: 700,
     },
     h5: {

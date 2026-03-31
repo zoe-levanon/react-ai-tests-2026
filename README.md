@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# Presentation Library
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This app is now a folder-based presentation library built with React, Vite, and Material UI.
 
-Currently, two official plugins are available:
+## Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- The home page lists every presentation inside `src/presentations`.
+- Each presentation lives in its own folder.
+- Every folder needs an `index.tsx` component file, a `meta.ts` metadata file, and a `slides.ts` file.
 
-## React Compiler
+## Add A Presentation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Create a new folder under `src/presentations`.
+2. Add `index.tsx`, `meta.ts`, and `slides.ts` files in that folder.
+3. Export `presentationMeta` from `meta.ts`.
+4. Export `presentationSlides` from `slides.ts`.
+5. Export the presentation component from `index.tsx`.
+6. Run `npm run dev`.
 
-## Expanding the ESLint configuration
+Example:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```tsx
+// meta.ts
+import type { PresentationMeta } from '../catalog'
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+export const presentationMeta: PresentationMeta = {
+  title: 'Q2 Roadmap',
+  description: 'Company priorities and release plan.',
+  accent: '#a44d35',
+  updatedAt: '2026-03-28',
+  tags: ['Roadmap', 'Planning'],
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+```tsx
+// slides.ts
+import type { PresentationSlide } from '../catalog'
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+export const presentationSlides: PresentationSlide[] = [
+  { id: 'intro', eyebrow: 'Slide 01', title: 'Q2 Roadmap' },
+]
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```tsx
+// index.tsx
+import type { PresentationComponentProps } from '../catalog'
+
+export default function Q2RoadmapPresentation({ slide }: PresentationComponentProps) {
+  return <div>{slide.title}</div>
+}
 ```
